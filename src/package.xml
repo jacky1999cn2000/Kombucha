@@ -13,7 +13,7 @@
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>Kumbucha_Configuration__c</members>
+        <members>Kombucha_Configuration__c</members>
         <name>CustomObject</name>
     </types>
     <types>
