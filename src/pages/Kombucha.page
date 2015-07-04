@@ -1,4 +1,7 @@
-<apex:page applyBodyTag="false" docType="html-5.0" showHeader="false" standardStylesheets="false">
+<apex:page applyBodyTag="false" docType="html-5.0" showHeader="false" standardStylesheets="false" controller="KombuchaApexRouter" action="{!init}">
+
+	<apex:pageMessages />
+	
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" /> 
     <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.Kombucha, 'app/css/flat-ui.min.css')}" /> 
     <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.Kombucha, 'app/css/kombucha.css')}" /> 
@@ -18,8 +21,12 @@
 
 	    <!-- custom scripts -->
 	    <script src="{!URLFOR($Resource.Kombucha, 'app/app.js')}"></script>
+	
+		<script src="{!URLFOR($Resource.Kombucha, 'app/controllers/HomeController.js')}"></script>
 	    <script src="{!URLFOR($Resource.Kombucha, 'app/controllers/HeaderController.js')}"></script>
 	    <script src="{!URLFOR($Resource.Kombucha, 'app/controllers/SettingsController.js')}"></script>
+
+		<script src="{!URLFOR($Resource.Kombucha, 'app/services/RemoteService.js')}"></script>
 
 	</body> 
 </apex:page>

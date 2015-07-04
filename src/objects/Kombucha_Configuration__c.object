@@ -4,27 +4,18 @@
     <customSettingsVisibility>Public</customSettingsVisibility>
     <description>Kombucha Configuration Data.</description>
     <enableFeeds>false</enableFeeds>
+
     <fields>
         <fullName>Instance_URL__c</fullName>
         <description>Your Salesforce Instance URL</description>
         <externalId>false</externalId>
         <label>Instance URL</label>
         <length>80</length>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>ToolingAPI_URL__c</fullName>
-        <description>Tooling API URL</description>
-        <externalId>false</externalId>
-        <label>Tooling API URL</label>
-        <length>40</length>
-        <required>true</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
+
     <label>Kombucha Configuration</label>
 </CustomObject>
