@@ -1,0 +1,15 @@
+<div class="container">
+	<div ng-show="ready">
+    <timepicker ng-model="time" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+    <pre class="alert alert-info">The Report Will Be Sent At {{time | date:'shortTime'}} Everyday. </pre>
+    <hr>
+    <button class="btn btn-success btn-lg btn-block" ng-click="start()">START</button>
+	</div>	
+
+  <div ng-show="!ready" class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+      {{error}}
+  </div>  
+  <img ng-show="!ready" src="{{imgUrl}}"/>
+</div>

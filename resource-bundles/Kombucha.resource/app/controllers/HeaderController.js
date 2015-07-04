@@ -10,5 +10,5 @@ app.controller('HeaderController', ['$scope', 'resourceUrl', function($scope, re
 	};
 
 	$scope.imgUrl = resourceUrl + '/img/logo.png';
-	
+
 }]);

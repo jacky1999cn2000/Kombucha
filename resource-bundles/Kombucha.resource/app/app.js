@@ -17,7 +17,8 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 				controller: 'HeaderController'
 			},
 			'content': {
-				template: '<h1>content</h1>'
+				templateUrl: resourceUrl+'/templates/partials/home.html',
+				controller: 'HomeController'
 			},
 			'footer': {
 				templateUrl: resourceUrl+'/templates/partials/footer.html'
