@@ -1,0 +1,18 @@
+<div class="container">
+	<div>
+		<tabset justified="true">
+			<tab select="selectTab('general')">
+      			<tab-heading><i class="glyphicon glyphicon-th-large"></i> General</tab-heading>
+      			<div ui-view="general"></div>
+    		</tab>
+    		<tab select="selectTab('search')">
+      			<tab-heading><i class="glyphicon glyphicon-search"></i> Search</tab-heading>
+      			<div ui-view="search"></div>
+    		</tab>
+	    	<tab select="selectTab('email')">
+      			<tab-heading><i class="glyphicon glyphicon-envelope"></i> Email</tab-heading>
+      			<div ui-view="email"></div>
+    		</tab>
+	  	</tabset>
+	</div>	
+</div>
