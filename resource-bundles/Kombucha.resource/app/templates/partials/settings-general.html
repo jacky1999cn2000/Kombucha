@@ -1,4 +1,32 @@
 <div class="tabContent">
 	<form name='generalForm' class="form-horizontal">
+		<div class="well well-sm"><p>Username and password will be used to retrieve a valid SessionId which will be used in an asynchronous future job to call Tooling API (We can't simply use UserInfo.getSessionId() here since the job is run in System mode).</p> <p><strong>We will NOT store your username and password outside this app or use them in other places.</strong></p></div>
+
+		<div class="form-group" ng-class="{'has-error' : generalForm.username.$invalid}">
+			<label class="col-sm-2 control-label">Username</label>
+	        <div class="col-sm-10">
+				<input type="text" name='username' ng-model="data.generalForm.username" class="form-control"
+			        	placeholder=""
+			          	tooltip="This field is required."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="generalForm.username.$invalid"
+					  	required 
+					  	ng-change="update('generalForm.username')"/>
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : generalForm.password.$invalid}">
+	        <label class="col-sm-2 control-label">Password</label>
+	        <div class="col-sm-10">
+				<input type="text" name='password' ng-model="data.generalForm.password" class="form-control"
+			        	placeholder=""
+			          	tooltip="This field is required."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="generalForm.password.$invalid"
+					  	required 
+					  	ng-change="update('generalForm.password')"/>
+		    </div>        
+	    </div>
 	</form>
 </div>

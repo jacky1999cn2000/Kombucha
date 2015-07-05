@@ -1,6 +1,6 @@
 <div class="tabContent">
 	<form name='searchForm' class="form-horizontal">
-		<div class="well well-sm">The key word(s) and namespece will be used to build appropriate SOQL WHERE clause when querying test classes by their namespeces and names. You could also designate the keyword should appear at start, end, or anywhere in the class name. For example, <code>SELECT Id, Name FROM ApexClass WHERE Name LIKE 'Test%' AND Name LIKE '%Apex%' AND NamespacePrefix = 'myApp'</code> will return all test classes whose names start with 'Test' and contain 'Apex' while with 'myApp' as their namespaces.</div>
+		<div class="well well-sm"><p>The key word(s) and namespece will be used to build appropriate SOQL WHERE clause when querying test classes by their namespeces and names. You could also designate the keyword should appear at start, end, or anywhere in the class name.</p> <p>For example, <code>SELECT Id, Name FROM ApexClass WHERE Name LIKE 'Test%' AND Name LIKE '%Apex%' AND NamespacePrefix = 'myApp'</code> will return all test classes whose names start with 'Test' and contain 'Apex' while with 'myApp' as their namespaces.</p></div>
 
 		<div class="form-group" ng-class="{'has-error' : searchForm.namespace.$invalid}">
 	        <label class="col-sm-2 control-label">Namespace</label>
@@ -19,7 +19,7 @@
 	        <label class="col-sm-2 control-label">Key Word 1</label>
 	        <div class="col-sm-10">
 				<input type="text" name='query1' ng-model="data.searchFormData.query1" class="form-control"
-			        	placeholder="Required"
+			        	placeholder=""
 			          	tooltip="This is a required field, and maximum length is 20 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
