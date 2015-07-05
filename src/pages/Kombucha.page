@@ -1,4 +1,4 @@
-<apex:page applyBodyTag="false" docType="html-5.0" showHeader="false" standardStylesheets="false" controller="KombuchaApexRouter" action="{!init}">
+<apex:page applyBodyTag="false" docType="html-5.0" showHeader="false" standardStylesheets="false" controller="KombuchaApexRouter" action="{!init}" title="Kombucha">
 
 	<apex:pageMessages />
 	
@@ -27,6 +27,7 @@
 	    <script src="{!URLFOR($Resource.Kombucha, 'app/controllers/SettingsController.js')}"></script>
 
 		<script src="{!URLFOR($Resource.Kombucha, 'app/services/RemoteService.js')}"></script>
+		<script src="{!URLFOR($Resource.Kombucha, 'app/services/SettingsService.js')}"></script>
 
 	</body> 
 </apex:page>

@@ -40,7 +40,8 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 		url: '/general',
 		views: {
 			'general@home.settings' : {
-				templateUrl: resourceUrl+'/templates/partials/settings-general.html'
+				templateUrl: resourceUrl+'/templates/partials/settings-general.html',
+				controller: 'SettingsController'
 			}
 		}
 	})
@@ -49,7 +50,8 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 		url: '/search',
 		views: {
 			'search@home.settings' : {
-				templateUrl: resourceUrl+'/templates/partials/settings-search.html'
+				templateUrl: resourceUrl+'/templates/partials/settings-search.html',
+				controller: 'SettingsController'
 			}
 		}
 	})
@@ -58,7 +60,8 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 		url: '/email',
 		views: {
 			'email@home.settings' : {
-				templateUrl: resourceUrl+'/templates/partials/settings-email.html'
+				templateUrl: resourceUrl+'/templates/partials/settings-email.html',
+				controller: 'SettingsController'
 			}
 		}
 	});

@@ -4,7 +4,8 @@
     <customSettingsVisibility>Public</customSettingsVisibility>
     <description>Kombucha Configuration Data.</description>
     <enableFeeds>false</enableFeeds>
-
+    
+    <!-- default settings -->
     <fields>
         <fullName>Instance_URL__c</fullName>
         <description>Your Salesforce Instance URL</description>
@@ -16,6 +17,45 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+
+    <!-- general settings -->
+
+    <!-- search settings -->
+    <fields>
+        <fullName>ApexClass_Query1__c</fullName>
+        <description>Apex Class Query 1</description>
+        <externalId>false</externalId>
+        <label>Apex Class Query 1</label>
+        <length>22</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query2__c</fullName>
+        <description>Apex Class Query 2</description>
+        <externalId>false</externalId>
+        <label>Apex Class Query 2</label>
+        <length>22</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query3__c</fullName>
+        <description>Apex Class Query 3</description>
+        <externalId>false</externalId>
+        <label>Apex Class Query 3</label>
+        <length>22</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+
+    <!-- email settings -->
 
     <label>Kombucha Configuration</label>
 </CustomObject>

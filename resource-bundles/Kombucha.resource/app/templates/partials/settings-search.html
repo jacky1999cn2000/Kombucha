@@ -1,1 +1,59 @@
-search
+<div class="tabContent">
+	<form name='searchForm' class="form-horizontal">
+		<div class="well well-sm">The key word(s) and namespece will be used to build appropriate SOQL WHERE clause when querying test classes by their namespeces and names. You could also designate the keyword should appear at start, end, or anywhere in the class name. For example, <code>SELECT Id, Name FROM ApexClass WHERE Name LIKE 'Test%' AND Name LIKE '%Apex%' AND NamespacePrefix = 'myApp'</code> will return all test classes whose names start with 'Test' and contain 'Apex' while with 'myApp' as their namespaces.</div>
+
+		<div class="form-group" ng-class="{'has-error' : searchForm.namespace.$invalid}">
+	        <label class="col-sm-2 control-label">Namespace</label>
+	        <div class="col-sm-10">
+				<input type="text" name='namespace' ng-model="data.searchFormData.namespace" class="form-control"
+			        	placeholder=""
+			          	tooltip="The maximum length for this field is 20 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="searchForm.namespace.$invalid"
+					  	ng-maxlength="20" 
+					  	ng-change="update('searchFormData.namespace')"/>
+		    </div>        
+	    </div>
+	  	<div class="form-group" ng-class="{'has-error' : searchForm.query1.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 1</label>
+	        <div class="col-sm-10">
+				<input type="text" name='query1' ng-model="data.searchFormData.query1" class="form-control"
+			        	placeholder="Required"
+			          	tooltip="This is a required field, and maximum length is 20 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="searchForm.query1.$invalid"
+			          	required
+					  	ng-maxlength="20" 
+					  	ng-change="update('searchFormData.query1')"/>
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : searchForm.query2.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 2</label>
+	        <div class="col-sm-10">
+				<input type="text" name='query2' ng-model="data.searchFormData.query2" class="form-control"
+			        	placeholder=""
+			          	tooltip="The maximum length for this field is 20 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="searchForm.query2.$invalid"
+					  	ng-maxlength="20"
+					  	ng-change="update('searchFormData.query2')" />
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : searchForm.query3.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 3</label>
+	        <div class="col-sm-10">
+				<input type="text" name='query3' ng-model="data.searchFormData.query3" class="form-control"
+			        	placeholder=""
+			          	tooltip="The maximum length for this field is 20 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="searchForm.query3.$invalid"
+					  	ng-maxlength="20"
+					  	ng-change="update('searchFormData.query3')" />
+		    </div>        
+	    </div>
+    </form>
+</div>
