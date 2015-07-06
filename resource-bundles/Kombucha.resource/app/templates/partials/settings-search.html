@@ -5,21 +5,21 @@
 		<div class="form-group" ng-class="{'has-error' : searchForm.namespace.$invalid}">
 	        <label class="col-sm-2 control-label">Namespace</label>
 	        <div class="col-sm-10">
-				<input type="text" name='namespace' ng-model="data.searchFormData.namespace" class="form-control"
+				<input type="text" name='namespace' ng-model="kombucha.data.searchFormData.namespace" class="form-control"
 			        	placeholder=""
 			          	tooltip="The maximum length for this field is 20 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="searchForm.namespace.$invalid"
 					  	ng-maxlength="20" 
-					  	ng-readonly="!data.editMode"/>
+					  	ng-readonly="!kombucha.data.editMode"/>
 		    </div>        
 	    </div>
 	  	<div class="form-group" ng-class="{'has-error' : searchForm.query1.$invalid}">
 	        <label class="col-sm-2 control-label">Key Word 1</label>
 	        <div class="col-sm-10">
 	        	<div class="input-group">
-					<input type="text" name='query1' ng-model="data.searchFormData.query1" class="form-control"
+					<input type="text" name='query1' ng-model="kombucha.data.searchFormData.query1" class="form-control"
 				        	placeholder=""
 				          	tooltip="This is a required field, and maximum length is 20 characters."
 				          	tooltip-placement="top"
@@ -27,11 +27,11 @@
 				          	tooltip-enable="searchForm.query1.$invalid"
 				          	required
 						  	ng-maxlength="20" 
-						  	ng-readonly="!data.editMode"/>
+						  	ng-readonly="!kombucha.data.editMode"/>
 					<span class="input-group-addon">
-				          	<input type="radio" name="query1_position" ng-model="data.searchFormData.query1_position" value="start" ng-readonly="!data.editMode"> start
-				          	<input type="radio" name="query1_position" ng-model="data.searchFormData.query1_position" value="end" ng-readonly="!data.editMode"> end
-				          	<input type="radio" name="query1_position" ng-model="data.searchFormData.query1_position" value="anywhere" ng-readonly="!data.editMode"> anywhere
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.searchFormData.query1_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.searchFormData.query1_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.searchFormData.query1_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
 					</span>
 				</div>
 		    </div>        
@@ -40,18 +40,18 @@
 	        <label class="col-sm-2 control-label">Key Word 2</label>
 	        <div class="col-sm-10">
 	        	<div class="input-group">
-					<input type="text" name='query2' ng-model="data.searchFormData.query2" class="form-control"
+					<input type="text" name='query2' ng-model="kombucha.data.searchFormData.query2" class="form-control"
 				        	placeholder=""
 				          	tooltip="The maximum length for this field is 20 characters."
 				          	tooltip-placement="top"
 				          	tooltip-trigger="mouseenter"
 				          	tooltip-enable="searchForm.query2.$invalid"
 						  	ng-maxlength="20" 
-						  	ng-readonly="!data.editMode"/>
+						  	ng-readonly="!kombucha.data.editMode"/>
 					<span class="input-group-addon">
-				          	<input type="radio" name="query2_position" ng-model="data.searchFormData.query2_position" value="start" ng-readonly="!data.editMode"> start
-				          	<input type="radio" name="query2_position" ng-model="data.searchFormData.query2_position" value="end" ng-readonly="!data.editMode"> end
-				          	<input type="radio" name="query2_position" ng-model="data.searchFormData.query2_position" value="anywhere" ng-readonly="!data.editMode"> anywhere
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.searchFormData.query2_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.searchFormData.query2_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.searchFormData.query2_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
 					</span>
 				</div>
 		    </div>        
@@ -60,18 +60,18 @@
 	        <label class="col-sm-2 control-label">Key Word 3</label>
 	        <div class="col-sm-10">
 	        	<div class="input-group">
-					<input type="text" name='query3' ng-model="data.searchFormData.query3" class="form-control"
+					<input type="text" name='query3' ng-model="kombucha.data.searchFormData.query3" class="form-control"
 				        	placeholder=""
 				          	tooltip="The maximum length for this field is 20 characters."
 				          	tooltip-placement="top"
 				          	tooltip-trigger="mouseenter"
 				          	tooltip-enable="searchForm.query3.$invalid"
 						  	ng-maxlength="20" 
-						  	ng-readonly="!data.editMode"/>
+						  	ng-readonly="!kombucha.data.editMode"/>
 					<span class="input-group-addon">
-				          	<input type="radio" name="query3_position" ng-model="data.searchFormData.query3_position" value="start" ng-readonly="!data.editMode"> start
-				          	<input type="radio" name="query3_position" ng-model="data.searchFormData.query3_position" value="end" ng-readonly="!data.editMode"> end
-				          	<input type="radio" name="query3_position" ng-model="data.searchFormData.query3_position" value="anywhere" ng-readonly="!data.editMode"> anywhere
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.searchFormData.query3_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.searchFormData.query3_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.searchFormData.query3_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
 					</span>
 				</div>
 		    </div>        

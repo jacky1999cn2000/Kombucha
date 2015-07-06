@@ -28,7 +28,6 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', func
 				$scope.ready = false;
 				$scope.error = response.statusMessage;
 			}
-			
 		},
 		function(error){
 			$scope.ready = false;

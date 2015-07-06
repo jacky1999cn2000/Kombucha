@@ -13,13 +13,13 @@ app.factory('remoteService', ['$q', '$rootScope', function($q, $rootScope){
 				type,
 				params,
 				function(result, event){
-					//$rootScope.$apply(function(){
+					$rootScope.$apply(function(){
 						if(event.status){
 							deferred.resolve(result);
 						}else{
 							deferred.reject(event);
 						}
-					//});	
+					});	
 				},
 				{ buffer: true, escape: false, timeout: 30000 }
 		);
