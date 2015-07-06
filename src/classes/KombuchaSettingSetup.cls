@@ -34,6 +34,51 @@ public with sharing class KombuchaSettingSetup {
 		return jsonString;
 	} 
 
+	public static String saveConfigData(String data){
+		Map<String, String> status = new Map<String, String>();
+		String jsonString = '';
+
+		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
+		Map<String, Object> configMap = (Map<String, Object>)JSON.deserializeUntyped(data);
+		for(String key : configMap.keySet()){
+			if(key == 'generalFormData'){
+				kombuchaConfig.Username__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('username'));
+				kombuchaConfig.Password__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('password'));
+			}
+			if(key == 'searchFormData'){
+				kombuchaConfig.Namespace__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('namespace'));
+				kombuchaConfig.Query1__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query1'));
+				kombuchaConfig.Query2__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query2'));
+				kombuchaConfig.Query3__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query3'));
+				kombuchaConfig.Query1_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query1_position'));
+				kombuchaConfig.Query2_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query2_position'));
+				kombuchaConfig.Query3_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query3_position'));
+			}
+			if(key == 'emailFormData'){
+				kombuchaConfig.Recipient__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('recipient'));
+				kombuchaConfig.Title__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('title'));
+				kombuchaConfig.Slack_Endpoint__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackendpoint'));
+				kombuchaConfig.Slack_Request__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackrequest'));
+				kombuchaConfig.Add_Date__c = Boolean.valueOf(((Map<String, Object>)configMap.get(key)).get('adddate'));
+			}
+		}
+
+		try{
+			update kombuchaConfig;
+			status.put('status', 'ok');
+			status.put('statusMessage', '');
+		}catch(Exception ex){
+			status.put('status', 'error');
+			status.put('statusMessage', 'Error when updating config');
+		}
+
+		List<Map<String, Object>> resultList = new List<Map<String, Object>>();
+		jsonString = KombuchaApexRouter.constructJSON(status, resultList);
+
+		return jsonString;
+	}
+
 	public static String getConfigData(){
 		Map<String, String> status = new Map<String, String>();
 		String jsonString = '';
@@ -68,6 +113,7 @@ public with sharing class KombuchaSettingSetup {
 		Map<String, Object> returnMap = new Map<String, Object>();
 
 		returnMap.put('editMode', false);
+		returnMap.put('alert', true);
 		returnMap.put('generalFormValid', false);
 		returnMap.put('searchFormValid', false);
 		returnMap.put('emailFormValid', false);

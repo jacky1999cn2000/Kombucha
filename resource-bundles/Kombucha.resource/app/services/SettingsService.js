@@ -38,5 +38,25 @@ app.factory('settingsService', ['$q', 'remoteService', function($q, remoteServic
 		return fac.kombucha;
 	};
 
+	fac.saveData = function(){
+		var deferred = $q.defer();
+
+		var type = 'settings';
+		var params = {};
+		params.action = 'saveConfigData';
+		params.data = JSON.stringify(fac.kombucha.data);
+
+		remoteService.call(type, params).then(
+			function(data){
+				var response = JSON.parse(data);
+				if(response.status === 'ok'){
+					deferred.resolve('ok');
+				}
+			}
+		);
+
+		return deferred.promise;
+	};
+
 	return fac;
 }]);

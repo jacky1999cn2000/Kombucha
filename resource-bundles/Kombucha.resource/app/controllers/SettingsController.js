@@ -12,7 +12,6 @@ app.controller('SettingsController', ['$scope', '$state','settingsService', func
 			$scope.kombucha = settingsService.getData();
 
 			//define all other methods then
-			
 			$scope.selectTab = function(tabName){
 				switch(tabName) {
 				    case 'general':
@@ -30,9 +29,21 @@ app.controller('SettingsController', ['$scope', '$state','settingsService', func
 			};
 
 			$scope.save = function(){
-				var data = JSON.stringify($scope.kombucha.data);
 				$scope.kombucha.data.editMode = !$scope.kombucha.data.editMode;
-				console.log('***save data: '+ data);			
+
+				settingsService.saveData().then(
+					function(success){
+						$scope.kombucha.data.alert = false;
+						setTimeout(function(){ 
+							$scope.kombucha.data.alert = true; 
+							$scope.$apply();
+							var data = JSON.stringify($scope.kombucha.data);				
+							console.log('***after alert data: '+ data);
+						}, 1500);
+						var data = JSON.stringify($scope.kombucha.data);				
+						console.log('***before alert data: '+ data);
+					}
+				);			
 			};
 
 			$scope.canSubmit = function(){

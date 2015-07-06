@@ -14,13 +14,16 @@ global with sharing class KombuchaApexRouter {
  			if(params.get('action') == 'checkAvailability'){
  				jsonString = KombuchaSettingSetup.isSchedulerAvailable();
  			}
+ 			if(params.get('action') == 'saveConfigData'){
+ 				jsonString = KombuchaSettingSetup.saveConfigData(params.get('data'));
+ 			}
  			if(params.get('action') == 'getConfigData'){
  				jsonString = KombuchaSettingSetup.getConfigData();
  			}
  		}
 
  		System.debug('***jsonString: '+jsonString);
- 		
+
  		return jsonString;
     }
 
