@@ -8,7 +8,6 @@
     <!-- default settings -->
     <fields>
         <fullName>Instance_URL__c</fullName>
-        <description>Your Salesforce Instance URL</description>
         <externalId>false</externalId>
         <label>Instance URL</label>
         <length>80</length>
@@ -17,38 +16,105 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Tooling_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>Tooling URL</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
 
     <!-- general settings -->
+    <fields>
+        <fullName>Username__c</fullName>
+        <externalId>false</externalId>
+        <label>Username</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Password__c</fullName>
+        <externalId>false</externalId>
+        <label>Password</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
 
     <!-- search settings -->
     <fields>
-        <fullName>ApexClass_Query1__c</fullName>
-        <description>Apex Class Query 1</description>
+        <fullName>Namespace__c</fullName>
         <externalId>false</externalId>
-        <label>Apex Class Query 1</label>
-        <length>22</length>
+        <label>Namespace</label>
+        <length>20</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>ApexClass_Query2__c</fullName>
-        <description>Apex Class Query 2</description>
+        <fullName>Query1__c</fullName>
         <externalId>false</externalId>
-        <label>Apex Class Query 2</label>
-        <length>22</length>
+        <label>Query 1</label>
+        <length>20</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>ApexClass_Query3__c</fullName>
-        <description>Apex Class Query 3</description>
+        <fullName>Query2__c</fullName>
         <externalId>false</externalId>
-        <label>Apex Class Query 3</label>
-        <length>22</length>
+        <label>Query 2</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Query3__c</fullName>
+        <externalId>false</externalId>
+        <label>Query 3</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Query1_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>Query1 Position</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Query2_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>Query2 Position</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Query3_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>Query3 Position</label>
+        <length>10</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -56,6 +122,54 @@
     </fields>
 
     <!-- email settings -->
+    <fields>
+        <fullName>Recipient__c</fullName>
+        <externalId>false</externalId>
+        <label>Recipient</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Title</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Slack_Endpoint__c</fullName>
+        <externalId>false</externalId>
+        <label>Slack Endpoint</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Slack_Request__c</fullName>
+        <externalId>false</externalId>
+        <label>Slack Request</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Add_Date__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Add Date</label>
+        <type>Checkbox</type>
+    </fields>
+    
 
     <label>Kombucha Configuration</label>
 </CustomObject>

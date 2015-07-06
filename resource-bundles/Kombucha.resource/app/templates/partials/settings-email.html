@@ -1,40 +1,41 @@
 <div class="tabContent">
-	<form name='emailForm' class="form-horizontal">
+	<form name='emailForm' class="form-horizontal" novalidate>
 		<div class="well well-sm"><p>Please enter recipient's email address and email title, and check the checkbox if you want add date to the title.</p> <p>For Slack integration, please enter request content (<code> e.g. payload={"channel": "#channel_name", "username": "username", "text": "code coverage: ' + codeCoverage +'%.", "icon_emoji": ":salesforce:"}</code>) and endpoint (<code> e.g. https://companyname.slack.com/services/hooks/incoming-webhook?token=Wmi5pILb2fAYOT2B0zn9mcXQ</code>).</p> <p><strong>codeCoverage will be replaced with actual code coverage.</strong></p></div>
 
 		<div class="form-group" ng-class="{'has-error' : emailForm.recipient.$invalid}">
 			<label class="col-sm-2 control-label">Recipient</label>
 	        <div class="col-sm-10">
-				<input type="email" name='recipient' ng-model="data.emailForm.recipient" class="form-control"
+				<input type="email" name='recipient' ng-model="data.emailFormData.recipient" class="form-control"
 			        	placeholder=""
 			          	tooltip="This is a required field, and maximum length is 40 characters. And don't forget to enter a valid email address."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="emailForm.recipient.$invalid"
 					  	required 
-					  	ng-maxlength="40"
-					  	ng-change="update('emailForm.recipient')"/>
+					  	ng-maxlength="40" 
+					  	ng-readonly="!data.editMode"/>
 		    </div>       
 	    </div>
 	    <div class="form-group" ng-class="{'has-error' : emailForm.title.$invalid}">
 			<label class="col-sm-2 control-label">Title</label>
 	        <div class="col-sm-10">
 	        	<div class="input-group">
-					<input type="text" name='title' ng-model="data.emailForm.title" class="form-control"
+					<input type="text" name='title' ng-model="data.emailFormData.title" class="form-control"
 				        	placeholder=""
 				          	tooltip="This is a required field, and maximum length is 40 characters."
 				          	tooltip-placement="top"
 				          	tooltip-trigger="mouseenter"
 				          	tooltip-enable="emailForm.title.$invalid"
 						  	required 
-						  	ng-maxlength="40"
-						  	ng-change="update('emailForm.title')"/>
+						  	ng-maxlength="40" 
+						  	ng-readonly="!data.editMode"/>
 					<span class="input-group-addon">
-						<input type="checkbox" ng-model="data.emailForm.adddate" 
+						<input type="checkbox" ng-model="data.emailFormData.adddate" 
 							tooltip="Check this if you want to add date in email title."
 				          	tooltip-placement="left"
 				          	tooltip-trigger="mouseenter"
-				          	tooltip-enable="true" />
+				          	tooltip-enable="true" 
+				          	ng-readonly="!data.editMode"/>
 					</span>
 				</div>
 		    </div>        
@@ -43,27 +44,27 @@
 	    <div class="form-group" ng-class="{'has-error' : emailForm.slackendpoint.$invalid}">
 			<label class="col-sm-2 control-label">Slack Endpoint</label>
 	        <div class="col-sm-10">
-				<input type="text" name='slackendpoint' ng-model="data.emailForm.slackendpoint" class="form-control"
+				<input type="text" name='slackendpoint' ng-model="data.emailFormData.slackendpoint" class="form-control"
 			        	placeholder=""
 			          	tooltip="This is a required field, and maximum length is 200 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="emailForm.slackendpoint.$invalid"
-					  	ng-maxlength="200"
-					  	ng-change="update('emailForm.slackendpoint')"/>
+					  	ng-maxlength="200" 
+					  	ng-readonly="!data.editMode"/>
 		    </div>        
 	    </div>
 	    <div class="form-group" ng-class="{'has-error' : emailForm.slackrequest.$invalid}">
 			<label class="col-sm-2 control-label">Slack Request</label>
 	        <div class="col-sm-10">
-				<input type="text" name='slackrequest' ng-model="data.emailForm.slackrequest" class="form-control"
+				<input type="text" name='slackrequest' ng-model="data.emailFormData.slackrequest" class="form-control"
 			        	placeholder=""
 			          	tooltip="This is a required field, and maximum length is 200 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="emailForm.slackrequest.$invalid"
-					  	ng-maxlength="200"
-					  	ng-change="update('emailForm.slackrequest')"/>
+					  	ng-maxlength="200" 
+					  	ng-readonly="!data.editMode"/>
 		    </div>        
 	    </div>
 	</form>

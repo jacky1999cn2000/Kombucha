@@ -18,5 +18,6 @@
 </div>
 <div class="container form-submit-div">
   <hr>
-  <button class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="canSubmit()">SAVE</button>
+  <button class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="canSubmit()" ng-hide="!data.editMode">SAVE</button>
+  <button class="btn btn-success btn-lg btn-block" ng-click="data.editMode = !data.editMode;" ng-hide="data.editMode;">EDIT</button>
 </div>

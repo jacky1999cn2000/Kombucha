@@ -4,6 +4,8 @@ var app = angular.module('kombucha');
 
 app.controller('SettingsController', ['$scope', '$state','settingsService', function($scope, $state, settingsService){
 	$scope.data = settingsService.getData();
+	console.log('***settingsService.getData(): '+settingsService.getData());
+	console.log('***initialized data: '+$scope.data);
 
 	$scope.selectTab = function(tabName){
 		switch(tabName) {
@@ -23,14 +25,15 @@ app.controller('SettingsController', ['$scope', '$state','settingsService', func
 
 	$scope.save = function(){
 		var data = JSON.stringify($scope.data);
-		console.log('data: '+ data);
+		console.log('***save data: '+ data);
+		$scope.data.editMode = !$scope.data.editMode;
 	};
 
 	$scope.canSubmit = function(){
+		console.log('***scope data: '+ $scope.data);
 		var flag = $scope.data.generalFormValid && $scope.data.searchFormValid && $scope.data.emailFormValid;
 
 		if(angular.isUndefined(flag)){
-			console.log('flag is undefined.');
 			flag = false;
 		}
 

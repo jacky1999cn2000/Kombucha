@@ -4,13 +4,23 @@ global with sharing class KombuchaApexRouter {
 	*/
 	@RemoteAction
  	global static String router(String type, Map<String, String> params){
+ 		
+ 		System.debug('***type: '+type);
+ 		System.debug('***params: '+params);
 
  		String jsonString = '';
 
  		if(type == 'settings'){
- 			jsonString = KombuchaSettingSetup.isSchedulerAvailable();
+ 			if(params.get('action') == 'checkAvailability'){
+ 				jsonString = KombuchaSettingSetup.isSchedulerAvailable();
+ 			}
+ 			if(params.get('action') == 'getConfigData'){
+ 				jsonString = KombuchaSettingSetup.getConfigData();
+ 			}
  		}
 
+ 		System.debug('***jsonString: '+jsonString);
+ 		
  		return jsonString;
     }
 
@@ -63,4 +73,9 @@ global with sharing class KombuchaApexRouter {
  		String jsonString = JSON.serialize(jsonMap);
  		return jsonString;			
  	}
+
+
+	public void test(){
+		KombuchaSettingSetup.getConfigData();
+	}
 }

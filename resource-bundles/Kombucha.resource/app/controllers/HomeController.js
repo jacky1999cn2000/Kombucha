@@ -17,6 +17,7 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', func
 
 	var type = 'settings';
 	var params = {};
+	params.action = 'checkAvailability';
 
 	remoteService.call(type, params).then(
 		function(data){
