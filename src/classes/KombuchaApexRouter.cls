@@ -1,4 +1,5 @@
 global with sharing class KombuchaApexRouter {
+	public String hasRemoteSettings {get;set;}
 	/*
 		The major routing method.
 	*/
@@ -32,6 +33,9 @@ global with sharing class KombuchaApexRouter {
     	Also get Salesforce Instance URL here. 
     */
     public PageReference init(){
+
+    	System.debug('***in init');
+    	
     	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 		
 		if(kombuchaConfig == null){
@@ -52,6 +56,40 @@ global with sharing class KombuchaApexRouter {
 
 		return null;
     }
+
+    public Boolean getRemoteSettingStatus(){
+
+    	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
+    	if(kombuchaConfig == null || kombuchaConfig.Username__c == null || kombuchaConfig.Password__c == null || kombuchaConfig.Security_Code__c == null){
+    		return false;
+    	}
+    	
+    	String tokenEndpoint = 'https://login.salesforce.com/services/oauth2/token';
+		String username = kombuchaConfig.Username__c;
+		String password = kombuchaConfig.Password__c + kombuchaConfig.Security_Code__c; //'Test.12348zwttaiuGue3Y5eIkfHdISWg';
+		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
+		String clientSecret = '2098978559629868962';
+		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
+
+		if(response.contains('Unauthorized endpoint')){
+			return false;
+		}else{
+			return true;
+		}
+    }
+
+    public String getHost(){
+
+    	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
+    	if(kombuchaConfig == null || kombuchaConfig.Instance_URL__c == null){
+    		return '';
+    	}else{
+    		return kombuchaConfig.Instance_URL__c;
+    	}
+    }
+
 
     /*
     	A tooling function to construct JSON string.
@@ -79,6 +117,13 @@ global with sharing class KombuchaApexRouter {
 
 
 	public void test(){
-		KombuchaSettingSetup.getConfigData();
+		String tokenEndpoint = 'https://login.salesforce.com/services/oauth2/token';
+		String username = 'jacky.zhao@kombucha.com';
+		String password = 'Test.12348zwttaiuGue3Y5eIkfHdISWg';
+		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
+		String clientSecret = '2098978559629868962';
+		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
+		System.debug('***response '+response);
+		//Unauthorized endpoint
 	}
 }

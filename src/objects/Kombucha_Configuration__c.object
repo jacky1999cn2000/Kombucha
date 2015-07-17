@@ -16,23 +16,13 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>Tooling_URL__c</fullName>
-        <externalId>false</externalId>
-        <label>Tooling URL</label>
-        <length>80</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
 
     <!-- general settings -->
     <fields>
         <fullName>Username__c</fullName>
         <externalId>false</externalId>
         <label>Username</label>
-        <length>20</length>
+        <length>80</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -42,12 +32,23 @@
         <fullName>Password__c</fullName>
         <externalId>false</externalId>
         <label>Password</label>
-        <length>20</length>
+        <length>80</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Security_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Security Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+
 
     <!-- search settings -->
     <fields>

@@ -10,6 +10,7 @@ public with sharing class KombuchaSettingSetup {
 
 		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
+		//1. check if custom setting exists
 		if(kombuchaConfig == null){
 			status.put('status', 'error');
 			status.put('statusMessage', 'Kombucha custom setting is not available.');
@@ -17,9 +18,34 @@ public with sharing class KombuchaSettingSetup {
 			return jsonString;
 		}
 
-		if(kombuchaConfig.Instance_URL__c == null || kombuchaConfig.Instance_URL__c == ''){
+		//2. check if custom setting is well set
+		if(kombuchaConfig.Instance_URL__c == null || kombuchaConfig.Instance_URL__c == '' ||
+			kombuchaConfig.Username__c == null || kombuchaConfig.Username__c == '' ||
+			kombuchaConfig.Password__c == null || kombuchaConfig.Password__c == '' ||
+			kombuchaConfig.Security_Code__c == null || kombuchaConfig.Security_Code__c == '' ||
+			kombuchaConfig.Query1__c == null || kombuchaConfig.Query1__c == '' ||
+			kombuchaConfig.Query1_Position__c == null || kombuchaConfig.Query1_Position__c == '' ||
+			kombuchaConfig.Recipient__c == null || kombuchaConfig.Recipient__c == '' ||
+			kombuchaConfig.Title__c == null || kombuchaConfig.Title__c == '' ||
+			kombuchaConfig.Add_Date__c == null){
+
 			status.put('status', 'error');
 			status.put('statusMessage', 'Please go to SETTINGS page to complete configuration first.');
+			jsonString = KombuchaApexRouter.constructJSON(status, null);
+			return jsonString;
+		}
+
+		//3. check if username & password works
+		String tokenEndpoint = 'https://login.salesforce.com/services/oauth2/token';
+		String username = kombuchaConfig.Username__c;
+		String password = kombuchaConfig.Password__c + kombuchaConfig.Security_Code__c; //'Test.12348zwttaiuGue3Y5eIkfHdISWg';
+		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
+		String clientSecret = '2098978559629868962';
+		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
+
+		if(response.contains('Unauthorized endpoint')){
+			status.put('status', 'error');
+			status.put('statusMessage', 'Please update your username & password & security token in SETTING page.');
 			jsonString = KombuchaApexRouter.constructJSON(status, null);
 			return jsonString;
 		}
@@ -45,6 +71,7 @@ public with sharing class KombuchaSettingSetup {
 			if(key == 'generalFormData'){
 				kombuchaConfig.Username__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('username'));
 				kombuchaConfig.Password__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('password'));
+				kombuchaConfig.Security_Code__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('securitycode'));
 			}
 			if(key == 'searchFormData'){
 				kombuchaConfig.Namespace__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('namespace'));
@@ -92,6 +119,7 @@ public with sharing class KombuchaSettingSetup {
 		//generalFormData
 		generalFormData.put('username', toValidData(kombuchaConfig.Username__c));
 		generalFormData.put('password', toValidData(kombuchaConfig.Password__c));
+		generalFormData.put('securitycode', toValidData(kombuchaConfig.Security_Code__c));
 
 		//searchFormData
 		searchFormData.put('query1_position', (toValidData(kombuchaConfig.Query1_Position__c) == '') ? 'start' : toValidData(kombuchaConfig.Query1_Position__c));
@@ -138,8 +166,6 @@ public with sharing class KombuchaSettingSetup {
 		else
 			return String.valueOf(data);
 	}
-
-
 
 
 

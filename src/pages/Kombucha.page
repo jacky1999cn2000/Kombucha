@@ -11,7 +11,14 @@
 	    <div ui-view="header"></div>
 	    <div ui-view="content"></div>
 	    <div ui-view="footer"></div>
-
+		
+		<script type="text/javascript"> 
+			'use strict';
+			var kombucha_global = {};
+        	kombucha_global.remoteSettingStatus = '{!RemoteSettingStatus}';
+        	kombucha_global.sessionId = '{!$Api.Session_ID}';
+        	kombucha_global.host = '{!Host}';
+    	</script>
 	    
 	    <script src="{!URLFOR($Resource.Kombucha, 'app/scripts/jquery.min.js')}"></script>
 	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>

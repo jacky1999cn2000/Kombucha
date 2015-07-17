@@ -8,12 +8,12 @@
 	        <div class="col-sm-10">
 				<input type="text" name='username' ng-model="kombucha.data.generalFormData.username" class="form-control"
 			        	placeholder=""
-			          	tooltip="This is a required field, and maximum length is 20 characters."
+			          	tooltip="This is a required field, and maximum length is 80 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="generalForm.username.$invalid"
 					  	required 
-					  	ng-maxlength="20"
+					  	ng-maxlength="80"
 					  	ng-readonly="!kombucha.data.editMode"/>
 		    </div>        
 	    </div>
@@ -22,12 +22,26 @@
 	        <div class="col-sm-10">
 				<input type="text" name='password' ng-model="kombucha.data.generalFormData.password" class="form-control"
 			        	placeholder=""
-			          	tooltip="This is a required field, and maximum length is 20 characters."
+			          	tooltip="This is a required field, and maximum length is 80 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="generalForm.password.$invalid"
 					  	required 
-					  	ng-maxlength="20"
+					  	ng-maxlength="80"
+					  	ng-readonly="!kombucha.data.editMode"/>
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : generalForm.securitycode.$invalid}">
+	        <label class="col-sm-2 control-label">Security Code</label>
+	        <div class="col-sm-10">
+				<input type="text" name='securitycode' ng-model="kombucha.data.generalFormData.securitycode" class="form-control"
+			        	placeholder=""
+			          	tooltip="This is a required field, and maximum length is 80 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="generalForm.securitycode.$invalid"
+					  	required 
+					  	ng-maxlength="80"
 					  	ng-readonly="!kombucha.data.editMode"/>
 		    </div>        
 	    </div>
