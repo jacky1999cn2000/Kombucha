@@ -6,20 +6,33 @@
     <button class="btn btn-success btn-lg btn-block" ng-click="start()">START</button>
 	</div>	
 
-  <div ng-show="!ready && !noremotesetting" class="alert alert-danger" role="alert">
+  <div ng-show="!ready && remotesettings" class="alert alert-danger" role="alert">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="sr-only">Error:</span>
       {{error}}
   </div>  
-  <img ng-show="!ready && !noremotesetting" src="{{imgUrl}}"/> 
+  <img ng-show="!ready && remotesettings" src="{{imgUrl}}"/> 
   
-  <div ng-show="!ready && noremotesetting" class="alert alert-info" role="alert">
+  <div ng-show="!ready && !remotesettings" class="alert alert-info" role="alert">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <p>Kombucha needs to add <code>{{endpoint}}</code> in remote site setting in order to communicate with Tooling API.</p>
+    <p>Kombucha needs to add the following endpoint(s) into remote site setting.</p>
     <p>Click CREATE to create remote site setting, and click LEAVE to leave Kombucha.</p>
     <hr>
-    <button class="btn btn-info btn-lg btn-block" ng-click="createRemoteSettings()">CREATE</button>
-    <button class="btn btn-danger btn-lg btn-block" ng-click="leaveKombucha()">LEAVE</button>
+    <div ng-show="!tooling">
+      <p><code>{{host}}</code> - used to call with Tooling API.</p>
+      <button class="btn btn-info btn-lg btn-block" ng-click="createToolingApiRemoteSetting()">CREATE </button>
+      <hr>
+    </div>
+    
+    <div ng-show="!oauth">
+      <p> <code>{{host}}</code> - used to refresh session Id.</p>
+      <button class="btn btn-info btn-lg btn-block" ng-click="createOauthRemoteSettings()">CREATE</button>
+      <hr>
+    </div>
+    
+    <div>
+      <button class="btn btn-danger btn-lg btn-block" ng-click="leaveKombucha()">LEAVE</button>
+    </div>
   </div>  
    
 </div>

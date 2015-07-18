@@ -15,7 +15,8 @@
 		<script type="text/javascript"> 
 			'use strict';
 			var kombucha_global = {};
-        	kombucha_global.remoteSettingStatus = '{!RemoteSettingStatus}';
+        	kombucha_global.toolingApiRemoteSettingStatus = '{!ToolingApiRemoteSettingStatus}';
+        	kombucha_global.oauthRemoteSettingStatus = '{!OauthRemoteSettingStatus}';
         	kombucha_global.sessionId = '{!$Api.Session_ID}';
         	kombucha_global.host = '{!Host}';
     	</script>

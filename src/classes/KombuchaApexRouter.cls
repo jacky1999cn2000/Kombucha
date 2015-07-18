@@ -57,7 +57,40 @@ global with sharing class KombuchaApexRouter {
 		return null;
     }
 
-    public Boolean getRemoteSettingStatus(){
+    /*
+    	Initiate kombuchaConfig during Home page load (if it hasn't been initiated yet).
+    	Also get Salesforce Instance URL here. 
+    */
+    public static Boolean getToolingApiRemoteSettingStatus(){
+
+		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+		
+		if(kombuchaConfig == null){
+			return false;
+		}
+
+		try{
+			HttpRequest req = new HttpRequest();
+			req.setHeader('Authorization', 'Bearer ' + UserInfo.getSessionID());
+			req.setHeader('Content-Type', 'application/json');
+			req.setEndpoint('https://' + kombuchaConfig.Instance_URL__c + '/services/data/v31.0/tooling/sobjects/User/' + UserInfo.getUserId() +'/');
+			req.setMethod('GET'); 
+			Http h = new Http();
+
+			if(Test.isRunningTest()){
+				return false;
+			}else{
+				HttpResponse res = h.send(req);
+			}
+
+		}catch(Exception e){
+			return false;
+		}
+		
+		return true;
+	}
+
+    public Boolean getOauthRemoteSettingStatus(){
 
     	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
