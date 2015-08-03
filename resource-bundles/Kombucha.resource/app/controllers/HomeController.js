@@ -2,7 +2,7 @@
 
 var app = angular.module('kombucha');
 
-app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', '$state', '$http', '$window', function($scope, resourceUrl, remoteService, $state, $http, $window){
+app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'settingsService', '$state', '$http', '$window', function($scope, resourceUrl, remoteService, settingsService, $state, $http, $window){
 
 	console.log('tooling **'+kombucha_global.toolingApiRemoteSettingStatus);
 	console.log('oauth **'+kombucha_global.oauthRemoteSettingStatus);
@@ -13,16 +13,35 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', '$st
 	$scope.tooling = (kombucha_global.toolingApiRemoteSettingStatus == 'true');
 	$scope.oauth = (kombucha_global.oauthRemoteSettingStatus == 'true');
 	$scope.remotesettings = $scope.tooling && $scope.oauth;
-	$scope.validpassword = (kombucha_global.oauthRemoteSettingStatus == 'undefined');
 	
-	$scope.time = new Date();
-	$scope.hstep = 1;
-	$scope.mstep = 1;
-	$scope.ismeridian = true;
+	settingsService.initData().then(
+		function(){
+			$scope.kombucha = settingsService.getData();
 
-	$scope.start = function(){
+			var d = new Date();
+			d.setHours(parseInt($scope.kombucha.data.hour, 10));
+		    d.setMinutes(parseInt($scope.kombucha.data.minute, 10));
+		    //d.setSeconds(0);
+    		$scope.time = d;
+			$scope.hstep = 1;
+			$scope.mstep = 1;
+			$scope.ismeridian = true;
+			
+			//define start() function here, since we need $scope.kombucha available for this function
+			$scope.start = function(){
+				console.log('in start()');
+				$scope.kombucha.data.hour = $scope.time.getHours();
+				$scope.kombucha.data.minute = $scope.time.getMinutes();
+				console.log('kombucha: '+JSON.stringify($scope.kombucha.data));
 
-	};
+				settingsService.saveData().then(
+					function(){
+						console.log('save successful!');
+					}
+				);
+			};
+		}
+	);
 
 	$scope.createToolingApiRemoteSetting = function() {
 		var data =  

@@ -42,15 +42,13 @@ public with sharing class KombuchaSettingSetup {
 		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
 		String clientSecret = '2098978559629868962';
 		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
-System.debug('***the response: '+response);
+
 		if(response.contains('authentication failure')){
 			status.put('status', 'error');
 			status.put('statusMessage', 'Please update your username & password & security token in SETTING page.');
 			jsonString = KombuchaApexRouter.constructJSON(status, null);
 			return jsonString;
 		}
-
-		//status.put('statusMessage', 'Please update your username & password & security token in SETTING page.');
 
 		//TODO: CHECK WHETHER SCHEDULER JOBS ALREADY EXIST
 
@@ -90,6 +88,12 @@ System.debug('***the response: '+response);
 				kombuchaConfig.Slack_Endpoint__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackendpoint'));
 				kombuchaConfig.Slack_Request__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackrequest'));
 				kombuchaConfig.Add_Date__c = Boolean.valueOf(((Map<String, Object>)configMap.get(key)).get('adddate'));
+			}
+			if(key == 'hour'){
+				kombuchaConfig.Hour__c = String.valueOf(configMap.get(key));
+			}
+			if(key == 'minute'){
+				kombuchaConfig.Minute__c = String.valueOf(configMap.get(key));
 			}
 		}
 
@@ -151,6 +155,9 @@ System.debug('***the response: '+response);
 		returnMap.put('generalFormData', generalFormData);
 		returnMap.put('searchFormData', searchFormData);
 		returnMap.put('emailFormData', emailFormData);
+
+		returnMap.put('hour', toValidData(kombuchaConfig.Hour__c));
+		returnMap.put('minute', toValidData(kombuchaConfig.Minute__c));
 
 		status.put('status', 'ok');
 		status.put('statusMessage', '');
