@@ -42,13 +42,15 @@ public with sharing class KombuchaSettingSetup {
 		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
 		String clientSecret = '2098978559629868962';
 		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
-
-		if(response.contains('Unauthorized endpoint')){
+System.debug('***the response: '+response);
+		if(response.contains('authentication failure')){
 			status.put('status', 'error');
 			status.put('statusMessage', 'Please update your username & password & security token in SETTING page.');
 			jsonString = KombuchaApexRouter.constructJSON(status, null);
 			return jsonString;
 		}
+
+		//status.put('statusMessage', 'Please update your username & password & security token in SETTING page.');
 
 		//TODO: CHECK WHETHER SCHEDULER JOBS ALREADY EXIST
 

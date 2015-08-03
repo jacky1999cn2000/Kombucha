@@ -25,6 +25,14 @@ public with sharing class KombuchaSessionRefresher {
 
 		System.debug('***resp '+resp.getBody());
 
+		if(resp.getBody().contains('authentication failure')){
+			return 'authentication failure';
+		}
+
+		if(resp.getBody().contains('Unauthorized endpoint')){
+			return 'Unauthorized endpoint';
+		}
+
 		Map<String, Object> m = (Map<String, Object>)JSON.deserializeUntyped(resp.getBody());
 
 		return (String)m.get('access_token');

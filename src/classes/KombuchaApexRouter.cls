@@ -103,7 +103,12 @@ global with sharing class KombuchaApexRouter {
 		String password = kombuchaConfig.Password__c + kombuchaConfig.Security_Code__c; //'Test.12348zwttaiuGue3Y5eIkfHdISWg';
 		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
 		String clientSecret = '2098978559629868962';
+		
 		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
+
+		if(response.contains('authentication failure')){
+			return true;
+		}
 
 		if(response.contains('Unauthorized endpoint')){
 			return false;

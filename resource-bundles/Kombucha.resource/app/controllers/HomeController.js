@@ -13,6 +13,7 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', '$st
 	$scope.tooling = (kombucha_global.toolingApiRemoteSettingStatus == 'true');
 	$scope.oauth = (kombucha_global.oauthRemoteSettingStatus == 'true');
 	$scope.remotesettings = $scope.tooling && $scope.oauth;
+	$scope.validpassword = (kombucha_global.oauthRemoteSettingStatus == 'undefined');
 	
 	$scope.time = new Date();
 	$scope.hstep = 1;
@@ -116,7 +117,7 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', '$st
 	};
 
 	$scope.leaveKombucha = function(){
-		$window.location.href = $scope.endpoint;
+		$window.location.href = $scope.host;
 	};
 
 
