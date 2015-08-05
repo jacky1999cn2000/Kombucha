@@ -27,7 +27,7 @@
         <unique>false</unique>
         <defaultValue>'4'</defaultValue>
     </fields>
-     <fields>
+    <fields>
         <fullName>Minute__c</fullName>
         <externalId>false</externalId>
         <label>Minute</label>
@@ -37,6 +37,26 @@
         <type>Text</type>
         <unique>false</unique>
         <defaultValue>'0'</defaultValue>
+    </fields>
+    <fields>
+        <fullName>CronJobId_TestJobQueuer__c</fullName>
+        <externalId>false</externalId>
+        <label>Cron Job Id for TestJobQueuer</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CronJobName_TestJobQueuer__c</fullName>
+        <externalId>false</externalId>
+        <label>Cron Job Name for TestJobQueuer</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
 
     <!-- general settings -->

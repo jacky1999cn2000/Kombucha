@@ -24,20 +24,41 @@ global with sharing class KombuchaApexRouter {
  		}
 
  		if(type == 'scheduling'){
- 			if(params.get('action') == 'start'){
- 				Map<String, String> status = new Map<String, String>();
+ 			Map<String, String> status = new Map<String, String>();
+ 			List<Map<String, Object>> resultList = new List<Map<String, Object>>();
+			Map<String, Object> returnMap = new Map<String, Object>();
 
+			Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
+ 			if(params.get('action') == 'start'){
  				try{
  					KombuchaTestJobQueuer.createDailyScheduledJob();
  				}catch(Exception ex){
  					status.put('status', 'error');
 					status.put('statusMessage', ex.getMessage());	
  				}
- 				
- 				status.put('status', 'ok');
-				status.put('statusMessage', '');
-				jsonString = KombuchaApexRouter.constructJSON(status, null);
+
+				returnMap.put('cronJobId_TestJobQueuer', kombuchaConfig.CronJobId_TestJobQueuer__c);
+				returnMap.put('cronJobName_TestJobQueuer', kombuchaConfig.CronJobName_TestJobQueuer__c);
+				resultList.add(returnMap);
  			}
+
+ 			if(params.get('action') == 'delete'){
+ 				try{
+ 					System.abortJob(kombuchaConfig.CronJobId_TestJobQueuer__c);	
+ 				}catch(Exception ex){
+ 					status.put('status', 'error');
+					status.put('statusMessage', ex.getMessage());
+ 				}
+
+ 				kombuchaConfig.CronJobId_TestJobQueuer__c = '';
+ 				kombuchaConfig.CronJobName_TestJobQueuer__c = '';
+ 				update kombuchaConfig;
+ 			}
+
+ 			status.put('status', 'ok');
+			status.put('statusMessage', '');
+			jsonString = KombuchaApexRouter.constructJSON(status, resultList);
  		}
 
  		System.debug('***jsonString: '+jsonString);
@@ -83,6 +104,7 @@ global with sharing class KombuchaApexRouter {
 		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 		
 		if(kombuchaConfig == null){
+			System.debug('***kombuchaConfig is null');
 			return false;
 		}
 
@@ -101,6 +123,7 @@ global with sharing class KombuchaApexRouter {
 			}
 
 		}catch(Exception e){
+			System.debug('***in Exception');
 			return false;
 		}
 		

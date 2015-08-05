@@ -19,7 +19,11 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
         KombuchaTestJobQueuer ktjq = new KombuchaTestJobQueuer();  
  		
  		String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
-        System.schedule('Enqueue Unit Tests',sch,ktjq);
+        Id cronId = System.schedule('Kombucha - Enqueue Unit Tests',sch,ktjq);
+
+        kombuchaConfig.CronJobId_TestJobQueuer__c = cronId;
+        kombuchaConfig.CronJobName_TestJobQueuer__c = 'Kombucha - Enqueue Unit Tests';
+        update kombuchaConfig;
     }
 
 	/*
@@ -32,7 +36,8 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 	}
 
 	public static void enqueueTests(){
-		/* 	The first thing we need to do is to query all the test classes that 
+		/* 	
+			The first thing we need to do is to query all the test classes that 
 			we want to execute
 
          	In most org, test classes are named as "Test<Class_Name_Here>"
@@ -41,16 +46,43 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
          	We will build the where clause based on the keyword defined in settings.
        */
 
-       Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+       	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
-       String sql = 'SELECT Id, Name FROM ApexClass' + buildWhereClause(kombuchaConfig.Query1__c,kombuchaConfig.Query2__c,kombuchaConfig.Query3__c,kombuchaConfig.Query1_Position__c,kombuchaConfig.Query2_Position__c,kombuchaConfig.Query3_Position__c,kombuchaConfig.Namespace__c);
+       	String sql = 'SELECT Id, Name FROM ApexClass' + buildWhereClause(kombuchaConfig.Query1__c,kombuchaConfig.Query2__c,kombuchaConfig.Query3__c,kombuchaConfig.Query1_Position__c,kombuchaConfig.Query2_Position__c,kombuchaConfig.Query3_Position__c,kombuchaConfig.Namespace__c);
 
-       System.debug('***sql : '+sql);
+       	List<sObject> testClasses = Database.query(sql);
 
-       List<sObject> testClasses = Database.query(sql);
+       	Integer testClassesCnt = testClasses != null ? testClasses.size() : 0;
+       	System.debug('***testClassesCnt: '+testClassesCnt);
 
-       System.debug('***testClasses: '+testClasses);
+    	if(testClassesCnt > 0){
+       		/*
+       			Insertion of the ApexTestQueueItem causes the unit tests to be executed.
+       			Since they're asynchronous, the apex async job ID needs to be stored somewhere
+       			so we can process the test results when the job is complete.
+       		*/
+       		ApexTestQueueItem[] queueItems = new List<ApexTestQueueItem>();
+
+       		for(sObject testClass : testClasses){
+       			System.debug('***testClass: '+testClass);
+       			queueItems.add(new ApexTestQueueItem(ApexClassId=testClass.Id));
+       		}
+
+       		insert queueItems;
+
+       		//Get the job ID of the first queue item returned (they shared the same parent job Id)
+
+       		ApexTestQueueItem item = [SELECT ParentJobId FROM ApexTestQueueItem WHERE Id =: queueItems[0].Id LIMIT 1];
+
+       		Kombucha_Schedule_Job__c ksj = new Kombucha_Schedule_Job__c(Job_Id__c = item.parentjobid);
+
+       		insert ksj;
+       }
 	}
+
+
+
+	///utility functions
 
 	private static String buildWhereClause(String keyword1, String keyword2, String keyword3,
 										   String position1, String position2, String position3,

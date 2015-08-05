@@ -18,6 +18,9 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 		function(){
 			$scope.kombucha = settingsService.getData();
 
+			$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '');
+			console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
+
 			var d = new Date();
 			d.setHours(parseInt($scope.kombucha.data.hour, 10));
 		    d.setMinutes(parseInt($scope.kombucha.data.minute, 10));
@@ -43,6 +46,8 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 				)
 				.then(
 					function(){
+						console.log('cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
+						console.log('cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
 						console.log('scheduling successful!');
 					}
 				);
@@ -61,13 +66,49 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 			function(data){
 				var response = JSON.parse(data);
 				if(response.status === 'ok'){
+					console.log('response: '+JSON.stringify(response));
+
+					$scope.kombucha.data.cronJobId_TestJobQueuer = response.result[0].cronJobId_TestJobQueuer;
+					$scope.kombucha.data.cronJobName_TestJobQueuer = response.result[0].cronJobName_TestJobQueuer;
+					
+					console.log('--cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
+					console.log('--cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
+					
+					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '');
+					
+					console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
+					
 					deferred.resolve('ok');
 				}
 			}
 		);
 
 		return deferred.promise;
-	}
+	};
+
+
+	$scope.deleteJobs = function(){
+		var type = 'scheduling';
+		var params = {};
+		params.action = 'delete';
+
+		remoteService.call(type, params).then(
+			function(data){
+				var response = JSON.parse(data);
+				if(response.status === 'ok'){
+					$scope.kombucha.data.cronJobId_TestJobQueuer = '';
+					$scope.kombucha.data.cronJobName_TestJobQueuer = '';
+
+					console.log('--cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
+					console.log('--cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
+
+					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '');
+					
+					console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
+				}
+			}
+		);
+	};
 
 	$scope.createToolingApiRemoteSetting = function() {
 		var data =  
@@ -164,7 +205,6 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 	$scope.leaveKombucha = function(){
 		$window.location.href = $scope.host;
 	};
-
 
 	console.log('tooling: '+$scope.tooling);
 	console.log('oauth: '+$scope.oauth);

@@ -180,6 +180,9 @@ public with sharing class KombuchaSettingSetup {
 		returnMap.put('hour', toValidData(kombuchaConfig.Hour__c));
 		returnMap.put('minute', toValidData(kombuchaConfig.Minute__c));
 
+		returnMap.put('cronJobId_TestJobQueuer', toValidData(kombuchaConfig.CronJobId_TestJobQueuer__c));
+		returnMap.put('cronJobName_TestJobQueuer', toValidData(kombuchaConfig.CronJobName_TestJobQueuer__c));
+
 		status.put('status', 'ok');
 		status.put('statusMessage', '');
 		List<Map<String, Object>> resultList = new List<Map<String, Object>>();
