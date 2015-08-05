@@ -24,6 +24,7 @@ public with sharing class KombuchaSettingSetup {
 			kombuchaConfig.Password__c == null || kombuchaConfig.Password__c == '' ||
 			kombuchaConfig.Security_Code__c == null || kombuchaConfig.Security_Code__c == '' ||
 			kombuchaConfig.Query1__c == null || kombuchaConfig.Query1__c == '' ||
+			kombuchaConfig.ApexClass_Query1__c == null || kombuchaConfig.ApexClass_Query1__c == '' ||
 			kombuchaConfig.Query1_Position__c == null || kombuchaConfig.Query1_Position__c == '' ||
 			kombuchaConfig.Recipient__c == null || kombuchaConfig.Recipient__c == '' ||
 			kombuchaConfig.Title__c == null || kombuchaConfig.Title__c == '' ||
@@ -82,6 +83,15 @@ public with sharing class KombuchaSettingSetup {
 				kombuchaConfig.Query2_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query2_position'));
 				kombuchaConfig.Query3_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query3_position'));
 			}
+			if(key == 'apexclassFormData'){
+				kombuchaConfig.ApexClass_Namespace__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('namespace'));
+				kombuchaConfig.ApexClass_Query1__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query1'));
+				kombuchaConfig.ApexClass_Query2__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query2'));
+				kombuchaConfig.ApexClass_Query3__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query3'));
+				kombuchaConfig.ApexClass_Query1_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query1_position'));
+				kombuchaConfig.ApexClass_Query2_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query2_position'));
+				kombuchaConfig.ApexClass_Query3_Position__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('query3_position'));
+			}
 			if(key == 'emailFormData'){
 				kombuchaConfig.Recipient__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('recipient'));
 				kombuchaConfig.Title__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('title'));
@@ -120,6 +130,7 @@ public with sharing class KombuchaSettingSetup {
 
 		Map<String, Object> generalFormData = new Map<String, Object>();
 		Map<String, Object> searchFormData = new Map<String, Object>();
+		Map<String, Object> apexclassFormData = new Map<String, Object>();
 		Map<String, Object> emailFormData = new Map<String, Object>();
 
 		//generalFormData
@@ -135,6 +146,15 @@ public with sharing class KombuchaSettingSetup {
 		searchFormData.put('query2', toValidData(kombuchaConfig.Query2__c));
 		searchFormData.put('query3', toValidData(kombuchaConfig.Query3__c));
 		searchFormData.put('namespace', toValidData(kombuchaConfig.Namespace__c));
+
+		//apexclassFormData
+		apexclassFormData.put('query1_position', (toValidData(kombuchaConfig.ApexClass_Query1_Position__c) == '') ? 'start' : toValidData(kombuchaConfig.ApexClass_Query1_Position__c));
+		apexclassFormData.put('query2_position', (toValidData(kombuchaConfig.ApexClass_Query2_Position__c) == '') ? 'start' : toValidData(kombuchaConfig.ApexClass_Query2_Position__c));
+		apexclassFormData.put('query3_position', (toValidData(kombuchaConfig.ApexClass_Query3_Position__c) == '') ? 'start' : toValidData(kombuchaConfig.ApexClass_Query3_Position__c));
+		apexclassFormData.put('query1', toValidData(kombuchaConfig.ApexClass_Query1__c));
+		apexclassFormData.put('query2', toValidData(kombuchaConfig.ApexClass_Query2__c));
+		apexclassFormData.put('query3', toValidData(kombuchaConfig.ApexClass_Query3__c));
+		apexclassFormData.put('namespace', toValidData(kombuchaConfig.ApexClass_Namespace__c));
 
 		//emailFormData
 		emailFormData.put('adddate', Boolean.valueOf(toValidData(kombuchaConfig.Add_Date__c)));
@@ -155,6 +175,7 @@ public with sharing class KombuchaSettingSetup {
 		returnMap.put('generalFormData', generalFormData);
 		returnMap.put('searchFormData', searchFormData);
 		returnMap.put('emailFormData', emailFormData);
+		returnMap.put('apexclassFormData', apexclassFormData);
 
 		returnMap.put('hour', toValidData(kombuchaConfig.Hour__c));
 		returnMap.put('minute', toValidData(kombuchaConfig.Minute__c));

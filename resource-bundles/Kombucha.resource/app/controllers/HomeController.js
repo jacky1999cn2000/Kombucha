@@ -2,7 +2,7 @@
 
 var app = angular.module('kombucha');
 
-app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'settingsService', '$state', '$http', '$window', function($scope, resourceUrl, remoteService, settingsService, $state, $http, $window){
+app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'settingsService', '$state', '$http', '$window', '$q', function($scope, resourceUrl, remoteService, settingsService, $state, $http, $window, $q){
 
 	console.log('tooling **'+kombucha_global.toolingApiRemoteSettingStatus);
 	console.log('oauth **'+kombucha_global.oauthRemoteSettingStatus);
@@ -34,14 +34,40 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 				$scope.kombucha.data.minute = $scope.time.getMinutes();
 				console.log('kombucha: '+JSON.stringify($scope.kombucha.data));
 
-				settingsService.saveData().then(
+				settingsService.saveData()
+				.then(
 					function(){
 						console.log('save successful!');
+						$scope.schedule();
+					}
+				)
+				.then(
+					function(){
+						console.log('scheduling successful!');
 					}
 				);
 			};
 		}
 	);
+
+	$scope.schedule = function(){
+		var deferred = $q.defer();
+
+		var type = 'scheduling';
+		var params = {};
+		params.action = 'start';
+
+		remoteService.call(type, params).then(
+			function(data){
+				var response = JSON.parse(data);
+				if(response.status === 'ok'){
+					deferred.resolve('ok');
+				}
+			}
+		);
+
+		return deferred.promise;
+	}
 
 	$scope.createToolingApiRemoteSetting = function() {
 		var data =  

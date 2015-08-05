@@ -23,6 +23,23 @@ global with sharing class KombuchaApexRouter {
  			}
  		}
 
+ 		if(type == 'scheduling'){
+ 			if(params.get('action') == 'start'){
+ 				Map<String, String> status = new Map<String, String>();
+
+ 				try{
+ 					KombuchaTestJobQueuer.createDailyScheduledJob();
+ 				}catch(Exception ex){
+ 					status.put('status', 'error');
+					status.put('statusMessage', ex.getMessage());	
+ 				}
+ 				
+ 				status.put('status', 'ok');
+				status.put('statusMessage', '');
+				jsonString = KombuchaApexRouter.constructJSON(status, null);
+ 			}
+ 		}
+
  		System.debug('***jsonString: '+jsonString);
 
  		return jsonString;
@@ -155,13 +172,6 @@ global with sharing class KombuchaApexRouter {
 
 
 	public void test(){
-		String tokenEndpoint = 'https://login.salesforce.com/services/oauth2/token';
-		String username = 'jacky.zhao@kombucha.com';
-		String password = 'Test.12348zwttaiuGue3Y5eIkfHdISWg';
-		String clientId = '3MVG9QDx8IX8nP5TDUEcqn9g5NV2Mmoorc8ce29x4DibO9_vCc10quGGvZxEdCeF7EbxRoUU8cydvNd5ngVZd';
-		String clientSecret = '2098978559629868962';
-		String response = KombuchaSessionRefresher.requestAccessToken(username, password, clientId, clientSecret, tokenEndpoint);
-		System.debug('***response '+response);
-		//Unauthorized endpoint
+		KombuchaTestJobQueuer.enqueueTests();
 	}
 }

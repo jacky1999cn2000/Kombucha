@@ -56,6 +56,16 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 		}
 	})
 
+	.state('home.settings.apexclass', {
+		url: '/apexclass',
+		views: {
+			'apexclass@home.settings' : {
+				templateUrl: resourceUrl+'/templates/partials/settings-apexclass.html',
+				controller: 'SettingsController'
+			}
+		}
+	})
+
 	.state('home.settings.email', {
 		url: '/email',
 		views: {

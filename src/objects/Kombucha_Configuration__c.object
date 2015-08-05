@@ -144,6 +144,78 @@
         <unique>false</unique>
     </fields>
 
+    <!-- apexclass settings -->
+    <fields>
+        <fullName>ApexClass_Namespace__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Namespace</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query1__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query 1</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query2__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query 2</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query3__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query 3</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query1_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query1 Position</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query2_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query2 Position</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApexClass_Query3_Position__c</fullName>
+        <externalId>false</externalId>
+        <label>ApexClass Query3 Position</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+
     <!-- email settings -->
     <fields>
         <fullName>Recipient__c</fullName>

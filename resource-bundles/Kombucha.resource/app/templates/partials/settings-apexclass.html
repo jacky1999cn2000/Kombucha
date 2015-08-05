@@ -1,0 +1,80 @@
+<div class="tabContent">
+	<form name='apexclassForm' class="form-horizontal" novalidate>
+		<div class="well well-sm"><p>The key word(s) and namespece will be used to build appropriate SOQL WHERE clause when querying apex classes via Tooling API. This tab is similar to 'Search' tab <strong>except 'Search' tab is for querying test classes and this tab is for querying actual apex classes which you want to know code coverage.</strong></p></div>
+
+		<div class="form-group" ng-class="{'has-error' : apexclassForm.namespace.$invalid}">
+	        <label class="col-sm-2 control-label">Namespace</label>
+	        <div class="col-sm-10">
+				<input type="text" name='namespace' ng-model="kombucha.data.apexclassFormData.namespace" class="form-control"
+			        	placeholder=""
+			          	tooltip="The maximum length for this field is 20 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="apexclassForm.namespace.$invalid"
+					  	ng-maxlength="20" 
+					  	ng-readonly="!kombucha.data.editMode"/>
+		    </div>        
+	    </div>
+	  	<div class="form-group" ng-class="{'has-error' : apexclassForm.query1.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 1</label>
+	        <div class="col-sm-10">
+	        	<div class="input-group">
+					<input type="text" name='query1' ng-model="kombucha.data.apexclassFormData.query1" class="form-control"
+				        	placeholder=""
+				          	tooltip="This is a required field, and maximum length is 20 characters."
+				          	tooltip-placement="top"
+				          	tooltip-trigger="mouseenter"
+				          	tooltip-enable="apexclassForm.query1.$invalid"
+				          	required
+						  	ng-maxlength="20" 
+						  	ng-readonly="!kombucha.data.editMode"/>
+					<span class="input-group-addon">
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.apexclassFormData.query1_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.apexclassFormData.query1_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query1_position" ng-model="kombucha.data.apexclassFormData.query1_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
+					</span>
+				</div>
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : apexclassForm.query2.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 2</label>
+	        <div class="col-sm-10">
+	        	<div class="input-group">
+					<input type="text" name='query2' ng-model="kombucha.data.apexclassFormData.query2" class="form-control"
+				        	placeholder=""
+				          	tooltip="The maximum length for this field is 20 characters."
+				          	tooltip-placement="top"
+				          	tooltip-trigger="mouseenter"
+				          	tooltip-enable="apexclassForm.query2.$invalid"
+						  	ng-maxlength="20" 
+						  	ng-readonly="!kombucha.data.editMode"/>
+					<span class="input-group-addon">
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.apexclassFormData.query2_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.apexclassFormData.query2_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query2_position" ng-model="kombucha.data.apexclassFormData.query2_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
+					</span>
+				</div>
+		    </div>        
+	    </div>
+	    <div class="form-group" ng-class="{'has-error' : apexclassForm.query3.$invalid}">
+	        <label class="col-sm-2 control-label">Key Word 3</label>
+	        <div class="col-sm-10">
+	        	<div class="input-group">
+					<input type="text" name='query3' ng-model="kombucha.data.apexclassFormData.query3" class="form-control"
+				        	placeholder=""
+				          	tooltip="The maximum length for this field is 20 characters."
+				          	tooltip-placement="top"
+				          	tooltip-trigger="mouseenter"
+				          	tooltip-enable="apexclassForm.query3.$invalid"
+						  	ng-maxlength="20" 
+						  	ng-readonly="!kombucha.data.editMode"/>
+					<span class="input-group-addon">
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.apexclassFormData.query3_position" value="start" ng-readonly="!kombucha.data.editMode"> start
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.apexclassFormData.query3_position" value="end" ng-readonly="!kombucha.data.editMode"> end
+				          	<input type="radio" name="query3_position" ng-model="kombucha.data.apexclassFormData.query3_position" value="anywhere" ng-readonly="!kombucha.data.editMode"> anywhere
+					</span>
+				</div>
+		    </div>        
+	    </div>
+    </form>
+</div>
