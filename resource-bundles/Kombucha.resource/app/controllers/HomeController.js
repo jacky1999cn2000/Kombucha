@@ -46,8 +46,6 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 				)
 				.then(
 					function(){
-						console.log('cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
-						console.log('cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
 						console.log('scheduling successful!');
 					}
 				);
@@ -103,7 +101,7 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 					console.log('--cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
 
 					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '');
-					
+
 					console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
 				}
 			}

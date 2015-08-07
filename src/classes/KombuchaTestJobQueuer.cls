@@ -18,7 +18,8 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 
         KombuchaTestJobQueuer ktjq = new KombuchaTestJobQueuer();  
  		
- 		String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
+ 		//String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, String.valueOf(Integer.valueOf(kombuchaConfig.Hour__c) - 1)});
+        string sch = '0 50 18 * * ?'; 
         Id cronId = System.schedule('Kombucha - Enqueue Unit Tests',sch,ktjq);
 
         kombuchaConfig.CronJobId_TestJobQueuer__c = cronId;
@@ -84,7 +85,7 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 
 	///utility functions
 
-	private static String buildWhereClause(String keyword1, String keyword2, String keyword3,
+	public static String buildWhereClause(String keyword1, String keyword2, String keyword3,
 										   String position1, String position2, String position3,
 										   String namespaceprefix){
 		String whereClause = ' WHERE ';
