@@ -38,6 +38,16 @@
         <unique>false</unique>
         <defaultValue>'0'</defaultValue>
     </fields>
+    <fields>
+        <fullName>CodeCoverage__c</fullName>
+        <externalId>false</externalId>
+        <label>Code Coverage</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
 
     <fields>
         <fullName>CronJobId_TestJobQueuer__c</fullName>
@@ -73,6 +83,26 @@
         <fullName>CronJobName_CodeCoverageCalculator__c</fullName>
         <externalId>false</externalId>
         <label>Cron Job Name for CodeCoverageCalculator</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CronJobId_SlackPoster__c</fullName>
+        <externalId>false</externalId>
+        <label>Cron Job Id for SlackPoster</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CronJobName_SlackPoster__c</fullName>
+        <externalId>false</externalId>
+        <label>Cron Job Name for SlackPoster</label>
         <length>40</length>
         <required>false</required>
         <trackTrending>false</trackTrending>

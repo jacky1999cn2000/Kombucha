@@ -1,25 +1,39 @@
 public with sharing class KombuchaEmailer {
 
+    public static void sendEmail(String subject, String body, List<String> addresses){
+        System.debug('*** sending mail');
+
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage(); 
+        mail.setToAddresses(addresses);   
+        mail.setSubject(subject);
+        mail.setHtmlBody(body);
+        Messaging.sendEmail(new Messaging.Email[] { mail });
+    }
+
+    public static void sendPasswordUpdateEmail(){
+        Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+        List<String> addresses = new List<String>();
+        addresses.add(kombuchaConfig.Recipient__c);
+
+        String subject = 'Kombucha Reminder : Credential Update';
+        String body = '<p>Hi There!<br/><br/>It seems your password/security code need to be updated in Kombucha\'s setting page. Please update it so Kombucha can continue working for you.<br/><br/>Thanks!<br/><br/>Kombucha</p>';
+        
+        sendEmail(subject, body, addresses);
+    }
+
 	public static void sendTestResultEmail(List<ApexTestResult> jobTestResults, Map<String,String> codeCoverageResult){
         System.debug('*** In sendTestResultEmail');
-            
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-    
+ 
         Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
-        mail.setToAddresses(new String[] {kombuchaConfig.Recipient__c});
-        
         String emailSubject = kombuchaConfig.Title__c + ' ' + (kombuchaConfig.Add_Date__c ? String.valueOf(Date.today()) : ''); 
     
-        mail.setSubject(emailSubject);
-
         String testResultEmailbody = getTestResultHtmlEmailBody(jobTestResults, codeCoverageResult);
 
-        mail.setHtmlBody(testResultEmailbody);
-        
-        Messaging.sendEmail(new Messaging.Email[] { mail });
-        
-        system.debug('*** sent test results email');
+        List<String> addresses = new List<String>();
+        addresses.add(kombuchaConfig.Recipient__c);
+
+        sendEmail(emailSubject, testResultEmailbody, addresses);
     }
 
 

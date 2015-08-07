@@ -18,7 +18,7 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 		function(){
 			$scope.kombucha = settingsService.getData();
 
-			$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '');
+			$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '') || ($scope.kombucha.data.cronJobId_SlackPoster !== '');
 			console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
 
 			var d = new Date();
@@ -70,13 +70,17 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 					$scope.kombucha.data.cronJobName_TestJobQueuer = response.result[0].cronJobName_TestJobQueuer;
 					$scope.kombucha.data.cronJobId_CodeCoverageCalculator = response.result[0].cronJobId_CodeCoverageCalculator;
 					$scope.kombucha.data.cronJobName_CodeCoverageCalculator = response.result[0].cronJobName_CodeCoverageCalculator;
+					$scope.kombucha.data.cronJobId_SlackPoster = response.result[0].cronJobId_SlackPoster;
+					$scope.kombucha.data.cronJobName_SlackPoster = response.result[0].cronJobName_SlackPoster;
 					
 					console.log('--cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
 					console.log('--cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
 					console.log('--cronJobId_CodeCoverageCalculator: '+$scope.kombucha.data.cronJobId_CodeCoverageCalculator);
 					console.log('--cronJobName_CodeCoverageCalculator: '+$scope.kombucha.data.cronJobName_CodeCoverageCalculator);
+					console.log('--cronJobId_SlackPoster: '+$scope.kombucha.data.cronJobId_SlackPoster);
+					console.log('--cronJobName_SlackPoster: '+$scope.kombucha.data.cronJobName_SlackPoster);
 
-					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '');
+					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '') || ($scope.kombucha.data.cronJobId_SlackPoster !== '');
 					
 					console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
 					
@@ -102,13 +106,17 @@ app.controller('HomeController', ['$scope', 'resourceUrl', 'remoteService', 'set
 					$scope.kombucha.data.cronJobName_TestJobQueuer = '';
 					$scope.kombucha.data.cronJobId_CodeCoverageCalculator = '';
 					$scope.kombucha.data.cronJobName_CodeCoverageCalculator = '';
+					$scope.kombucha.data.cronJobId_SlackPoster = '';
+					$scope.kombucha.data.cronJobName_SlackPoster = '';
 
 					console.log('--cronJobId_TestJobQueuer: '+$scope.kombucha.data.cronJobId_TestJobQueuer);
 					console.log('--cronJobName_TestJobQueuer: '+$scope.kombucha.data.cronJobName_TestJobQueuer);
 					console.log('--cronJobId_CodeCoverageCalculator: '+$scope.kombucha.data.cronJobId_CodeCoverageCalculator);
 					console.log('--cronJobName_CodeCoverageCalculator: '+$scope.kombucha.data.cronJobName_CodeCoverageCalculator);
+					console.log('--cronJobId_SlackPoster: '+$scope.kombucha.data.cronJobId_SlackPoster);
+					console.log('--cronJobName_SlackPoster: '+$scope.kombucha.data.cronJobName_SlackPoster);
 
-					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '');
+					$scope.alreadyhavejobs = ($scope.kombucha.data.cronJobId_TestJobQueuer !== '') || ($scope.kombucha.data.cronJobId_CodeCoverageCalculator !== '') || ($scope.kombucha.data.cronJobId_SlackPoster !== '');
 
 					console.log('***alreadyhavejobs: '+$scope.alreadyhavejobs);
 				}

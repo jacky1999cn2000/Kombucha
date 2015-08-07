@@ -184,6 +184,8 @@ public with sharing class KombuchaSettingSetup {
 		returnMap.put('cronJobName_TestJobQueuer', toValidData(kombuchaConfig.CronJobName_TestJobQueuer__c));
 		returnMap.put('cronJobId_CodeCoverageCalculator', toValidData(kombuchaConfig.CronJobId_CodeCoverageCalculator__c));
 		returnMap.put('cronJobName_CodeCoverageCalculator', toValidData(kombuchaConfig.CronJobName_CodeCoverageCalculator__c));
+		returnMap.put('cronJobId_SlackPoster', toValidData(kombuchaConfig.CronJobId_SlackPoster__c));
+		returnMap.put('cronJobName_SlackPoster', toValidData(kombuchaConfig.CronJobName_SlackPoster__c));
 
 		status.put('status', 'ok');
 		status.put('statusMessage', '');

@@ -19,7 +19,7 @@ global with sharing class KombuchaCodeCoverageCalculator implements Schedulable{
         KombuchaCodeCoverageCalculator kccc = new KombuchaCodeCoverageCalculator();  
  		
  		//String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
-        string sch = '0 55 18 * * ?'; 
+        string sch = '0 58 14 * * ?'; 
         Id cronId = System.schedule('Kombucha - Calculate Code Coeverage',sch,kccc);
 
         kombuchaConfig.CronJobId_CodeCoverageCalculator__c = cronId;
@@ -63,6 +63,8 @@ global with sharing class KombuchaCodeCoverageCalculator implements Schedulable{
     			if(codeCoverageResult == null){
     				//username password expires, send email
     				System.debug('***did not get sessionId');
+                    KombuchaEmailer.sendPasswordUpdateEmail();
+                    return;
     			}
 
     			List<ApexTestResult> testResults = checkMethodStatus(completedAsyncJobIds);
@@ -94,8 +96,7 @@ global with sharing class KombuchaCodeCoverageCalculator implements Schedulable{
                 	System.debug('***codeCoverageResult: '+codeCoverageResult);
 
                 	counter++;
-                    //saveCodeCoverageInCustomSetting(codeCoverageResult.get('total coverage'));
-                    //sendTestResultJSON(codeCoverageResult);
+                    saveCodeCoverageToCustomSetting(codeCoverageResult.get('total coverage'));
                 }
 
                 List<Kombucha_Schedule_Job__c> queuedTestsToDelete = new List<Kombucha_Schedule_Job__c>();
@@ -124,6 +125,15 @@ global with sharing class KombuchaCodeCoverageCalculator implements Schedulable{
 
 
     //utility functions
+
+    public static void saveCodeCoverageToCustomSetting(String codeCoverage){
+        Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
+        if(kombuchaConfig != null){
+            kombuchaConfig.CodeCoverage__c = codeCoverage;
+            update kombuchaConfig;
+        }
+    }
 
     /*
     	Get the status and pass rate for each class whose tests were run by the job that

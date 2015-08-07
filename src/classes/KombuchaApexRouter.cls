@@ -43,6 +43,13 @@ global with sharing class KombuchaApexRouter {
 					status.put('statusMessage', ex.getMessage());	
  				}
 
+ 				try{
+ 					KombuchaSlackPoster.createDailyScheduledJob();
+ 				}catch(Exception ex){
+ 					status.put('status', 'error');
+					status.put('statusMessage', ex.getMessage());	
+ 				}
+
  				Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
  				System.debug('***kombuchaConfig: '+kombuchaConfig);
 
@@ -50,6 +57,8 @@ global with sharing class KombuchaApexRouter {
 				returnMap.put('cronJobName_TestJobQueuer', kombuchaConfig.CronJobName_TestJobQueuer__c);
 				returnMap.put('cronJobId_CodeCoverageCalculator', kombuchaConfig.CronJobId_CodeCoverageCalculator__c);
 				returnMap.put('cronJobName_CodeCoverageCalculator', kombuchaConfig.CronJobName_CodeCoverageCalculator__c);
+				returnMap.put('cronJobId_SlackPoster', kombuchaConfig.CronJobId_SlackPoster__c);
+				returnMap.put('cronJobName_SlackPoster', kombuchaConfig.CronJobName_SlackPoster__c);
 				resultList.add(returnMap);
  			}
 
@@ -60,6 +69,7 @@ global with sharing class KombuchaApexRouter {
  				try{
  					System.abortJob(kombuchaConfig.CronJobId_TestJobQueuer__c);	
  					System.abortJob(kombuchaConfig.CronJobId_CodeCoverageCalculator__c);
+ 					System.abortJob(kombuchaConfig.CronJobId_SlackPoster__c);
  				}catch(Exception ex){
  					status.put('status', 'error');
 					status.put('statusMessage', ex.getMessage());
@@ -67,6 +77,10 @@ global with sharing class KombuchaApexRouter {
 
  				kombuchaConfig.CronJobId_TestJobQueuer__c = '';
  				kombuchaConfig.CronJobName_TestJobQueuer__c = '';
+ 				kombuchaConfig.CronJobId_CodeCoverageCalculator__c = '';
+ 				kombuchaConfig.CronJobName_CodeCoverageCalculator__c = '';
+ 				kombuchaConfig.CronJobId_SlackPoster__c = '';
+ 				kombuchaConfig.CronJobName_SlackPoster__c = '';
  				update kombuchaConfig;
  			}
 
