@@ -46,7 +46,7 @@
 	        <div class="col-sm-10">
 				<input type="text" name='slackendpoint' ng-model="kombucha.data.emailFormData.slackendpoint" class="form-control"
 			        	placeholder=""
-			          	tooltip="This is a required field, and maximum length is 200 characters."
+			          	tooltip="The maximum length for this field is 200 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="emailForm.slackendpoint.$invalid"
@@ -59,10 +59,24 @@
 	        <div class="col-sm-10">
 				<input type="text" name='slackrequest' ng-model="kombucha.data.emailFormData.slackrequest" class="form-control"
 			        	placeholder=""
-			          	tooltip="This is a required field, and maximum length is 200 characters."
+			          	tooltip="The maximum length for this field is 200 characters."
 			          	tooltip-placement="top"
 			          	tooltip-trigger="mouseenter"
 			          	tooltip-enable="emailForm.slackrequest.$invalid"
+					  	ng-maxlength="200" 
+					  	ng-readonly="!kombucha.data.editMode"/>
+		    </div>        
+	    </div>
+	    <hr>
+	    <div class="form-group" ng-class="{'has-error' : emailForm.otherendpoint.$invalid}">
+			<label class="col-sm-2 control-label">Other Endpoint</label>
+	        <div class="col-sm-10">
+				<input type="text" name='slackendpoint' ng-model="kombucha.data.emailFormData.otherendpoint" class="form-control"
+			        	placeholder=""
+			          	tooltip="The maximum length for this field is 200 characters."
+			          	tooltip-placement="top"
+			          	tooltip-trigger="mouseenter"
+			          	tooltip-enable="emailForm.otherendpoint.$invalid"
 					  	ng-maxlength="200" 
 					  	ng-readonly="!kombucha.data.editMode"/>
 		    </div>        

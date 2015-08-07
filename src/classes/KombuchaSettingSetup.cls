@@ -98,6 +98,7 @@ public with sharing class KombuchaSettingSetup {
 				kombuchaConfig.Slack_Endpoint__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackendpoint'));
 				kombuchaConfig.Slack_Request__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('slackrequest'));
 				kombuchaConfig.Add_Date__c = Boolean.valueOf(((Map<String, Object>)configMap.get(key)).get('adddate'));
+				kombuchaConfig.Other_Endpoint__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('otherendpoint'));
 			}
 			if(key == 'hour'){
 				kombuchaConfig.Hour__c = String.valueOf(configMap.get(key));
@@ -162,6 +163,7 @@ public with sharing class KombuchaSettingSetup {
 		emailFormData.put('title', toValidData(kombuchaConfig.Title__c));
 		emailFormData.put('slackendpoint', toValidData(kombuchaConfig.Slack_Endpoint__c));
 		emailFormData.put('slackrequest', toValidData(kombuchaConfig.Slack_Request__c));
+		emailFormData.put('otherendpoint', toValidData(kombuchaConfig.Other_Endpoint__c));
 
 		//main data		
 		Map<String, Object> returnMap = new Map<String, Object>();

@@ -10,6 +10,17 @@ public with sharing class KombuchaEmailer {
         Messaging.sendEmail(new Messaging.Email[] { mail });
     }
 
+    public static void sendPostExceptionEmail(String endpoint, String error){
+        Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+        List<String> addresses = new List<String>();
+        addresses.add(kombuchaConfig.Recipient__c);
+
+        String subject = 'Kombucha Post Exception Information';
+        String body = '<p>Hi There!<br/><br/>Kombucha can\'t post the codeCoverage to the following endpoint:<br/> ' + endpoint + '<br/><br/> The error message is: <br/>' + error +'<br/><br/>Please make sure the endpoint is valid and have been added into remote site settings.<br/><br/>Thanks!<br/><br/>Kombucha</p>';
+        
+        sendEmail(subject, body, addresses);
+    }
+
     public static void sendPasswordUpdateEmail(){
         Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
         List<String> addresses = new List<String>();
