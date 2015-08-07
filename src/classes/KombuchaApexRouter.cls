@@ -28,8 +28,6 @@ global with sharing class KombuchaApexRouter {
  			List<Map<String, Object>> resultList = new List<Map<String, Object>>();
 			Map<String, Object> returnMap = new Map<String, Object>();
 
-			Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
-
  			if(params.get('action') == 'start'){
  				try{
  					KombuchaTestJobQueuer.createDailyScheduledJob();
@@ -38,14 +36,30 @@ global with sharing class KombuchaApexRouter {
 					status.put('statusMessage', ex.getMessage());	
  				}
 
+ 				try{
+ 					KombuchaCodeCoverageCalculator.createDailyScheduledJob();
+ 				}catch(Exception ex){
+ 					status.put('status', 'error');
+					status.put('statusMessage', ex.getMessage());	
+ 				}
+
+ 				Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+ 				System.debug('***kombuchaConfig: '+kombuchaConfig);
+
 				returnMap.put('cronJobId_TestJobQueuer', kombuchaConfig.CronJobId_TestJobQueuer__c);
 				returnMap.put('cronJobName_TestJobQueuer', kombuchaConfig.CronJobName_TestJobQueuer__c);
+				returnMap.put('cronJobId_CodeCoverageCalculator', kombuchaConfig.CronJobId_CodeCoverageCalculator__c);
+				returnMap.put('cronJobName_CodeCoverageCalculator', kombuchaConfig.CronJobName_CodeCoverageCalculator__c);
 				resultList.add(returnMap);
  			}
 
  			if(params.get('action') == 'delete'){
+
+ 				Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
+
  				try{
  					System.abortJob(kombuchaConfig.CronJobId_TestJobQueuer__c);	
+ 					System.abortJob(kombuchaConfig.CronJobId_CodeCoverageCalculator__c);
  				}catch(Exception ex){
  					status.put('status', 'error');
 					status.put('statusMessage', ex.getMessage());

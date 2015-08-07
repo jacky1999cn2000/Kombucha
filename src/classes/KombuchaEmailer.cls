@@ -1,7 +1,7 @@
 public with sharing class KombuchaEmailer {
 
 	public static void sendTestResultEmail(List<ApexTestResult> jobTestResults, Map<String,String> codeCoverageResult){
-        System.debug(' In sendTestResultEmail');
+        System.debug('*** In sendTestResultEmail');
             
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
     
@@ -19,12 +19,12 @@ public with sharing class KombuchaEmailer {
         
         Messaging.sendEmail(new Messaging.Email[] { mail });
         
-        system.debug(' sent test results email');
+        system.debug('*** sent test results email');
     }
 
 
     private static String getTestResultHtmlEmailBody(List<ApexTestResult> jobTestResults, Map<String, String> codeCoverageResult){
-        system.debug(' In getTestResultHtmlEmailBody');
+        system.debug('*** In getTestResultHtmlEmailBody');
         // Unfortunately, css has to be inlined because many email service providers now exclude external CSS
         // because it can pose a security risk.
         
