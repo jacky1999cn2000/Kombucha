@@ -18,8 +18,8 @@ global with sharing class KombuchaCodeCoverageCalculator implements Schedulable{
 
         KombuchaCodeCoverageCalculator kccc = new KombuchaCodeCoverageCalculator();  
  		
- 		//String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
-        string sch = '0 58 14 * * ?'; 
+ 		String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
+        //string sch = '0 58 14 * * ?'; 
         Id cronId = System.schedule('Kombucha - Calculate Code Coeverage',sch,kccc);
 
         kombuchaConfig.CronJobId_CodeCoverageCalculator__c = cronId;

@@ -17,8 +17,8 @@ global with sharing class KombuchaSlackPoster implements Schedulable{
 
         KombuchaSlackPoster ksp = new KombuchaSlackPoster();  
  		
- 		//String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, kombuchaConfig.Hour__c});
-        string sch = '0 35 16 * * ?'; 
+ 		String sch = String.format('0 {0} {1} * * ?', new String[] {kombuchaConfig.Minute__c, String.valueOf(Integer.valueOf(kombuchaConfig.Hour__c) + 1)});
+        //string sch = '0 35 16 * * ?'; 
         Id cronId = System.schedule('Kombucha - Slack Poster',sch,ksp);
 
         kombuchaConfig.CronJobId_SlackPoster__c = cronId;
