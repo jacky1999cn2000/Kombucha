@@ -18,22 +18,28 @@ public with sharing class KombuchaSessionRefresher {
 		Http http = new Http();
 		HttpResponse resp;
 		try{
-			resp = http.send(req);
+			if(!Test.isRunningTest()){
+				resp = http.send(req);
+			}
 		}catch(Exception ex){
 			return ex.getMessage();
 		}
 
-		System.debug('***resp '+resp.getBody());
+		if(!Test.isRunningTest()){
+			System.debug('***resp '+resp.getBody());
 
-		if(resp.getBody().contains('authentication failure')){
-			return 'authentication failure';
+			if(resp.getBody().contains('authentication failure')){
+				return 'authentication failure';
+			}
+
+			if(resp.getBody().contains('Unauthorized endpoint')){
+				return 'Unauthorized endpoint';
+			}
 		}
-
-		if(resp.getBody().contains('Unauthorized endpoint')){
-			return 'Unauthorized endpoint';
-		}
-
-		Map<String, Object> m = (Map<String, Object>)JSON.deserializeUntyped(resp.getBody());
+		
+		String resBody = (Test.isRunningTest()) ? KombuchaConstants.KOMBUCHA_SESSIONREFRESHER_RESPONSE : resp.getBody();
+		
+		Map<String, Object> m = (Map<String, Object>)JSON.deserializeUntyped(resBody);
 
 		return (String)m.get('access_token');
 	}
@@ -52,22 +58,3 @@ public with sharing class KombuchaSessionRefresher {
 		return String.join(params, '&');
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

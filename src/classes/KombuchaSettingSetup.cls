@@ -26,6 +26,7 @@ public with sharing class KombuchaSettingSetup {
 			kombuchaConfig.Query1__c == null || kombuchaConfig.Query1__c == '' ||
 			kombuchaConfig.ApexClass_Query1__c == null || kombuchaConfig.ApexClass_Query1__c == '' ||
 			kombuchaConfig.Query1_Position__c == null || kombuchaConfig.Query1_Position__c == '' ||
+			kombuchaConfig.ApexClass_Query1_Position__c == '' || kombuchaConfig.ApexClass_Query1_Position__c == '' ||
 			kombuchaConfig.Recipient__c == null || kombuchaConfig.Recipient__c == '' ||
 			kombuchaConfig.Title__c == null || kombuchaConfig.Title__c == '' ||
 			kombuchaConfig.Add_Date__c == null){
@@ -62,12 +63,14 @@ public with sharing class KombuchaSettingSetup {
 	} 
 
 	public static String saveConfigData(String data){
+		System.debug('***data: '+data);
 		Map<String, String> status = new Map<String, String>();
 		String jsonString = '';
 
 		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
 		Map<String, Object> configMap = (Map<String, Object>)JSON.deserializeUntyped(data);
+
 		for(String key : configMap.keySet()){
 			if(key == 'generalFormData'){
 				kombuchaConfig.Username__c = String.valueOf(((Map<String, Object>)configMap.get(key)).get('username'));
@@ -205,15 +208,4 @@ public with sharing class KombuchaSettingSetup {
 		else
 			return String.valueOf(data);
 	}
-
-
-
-
-
-
-
-
-
-
-
 }

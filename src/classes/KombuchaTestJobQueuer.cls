@@ -10,6 +10,7 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 	}
 
 	public static void createDailyScheduledJob(){
+		
 		Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 		
 		if(kombuchaConfig == null){
@@ -46,7 +47,6 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 
          	We will build the where clause based on the keyword defined in settings.
        */
-
        	Kombucha_Configuration__c kombuchaConfig = Kombucha_Configuration__c.getInstance(KombuchaConstants.CUSTOM_SETTING_NAME);
 
        	String sql = 'SELECT Id, Name FROM ApexClass' + buildWhereClause(kombuchaConfig.Query1__c,kombuchaConfig.Query2__c,kombuchaConfig.Query3__c,kombuchaConfig.Query1_Position__c,kombuchaConfig.Query2_Position__c,kombuchaConfig.Query3_Position__c,kombuchaConfig.Namespace__c);
@@ -69,13 +69,19 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
        			queueItems.add(new ApexTestQueueItem(ApexClassId=testClass.Id));
        		}
 
-       		insert queueItems;
-
+       		if(!Test.isRunningTest()){
+       			insert queueItems;
+       		}
+       		
        		//Get the job ID of the first queue item returned (they shared the same parent job Id)
+       		Kombucha_Schedule_Job__c ksj;
 
-       		ApexTestQueueItem item = [SELECT ParentJobId FROM ApexTestQueueItem WHERE Id =: queueItems[0].Id LIMIT 1];
-
-       		Kombucha_Schedule_Job__c ksj = new Kombucha_Schedule_Job__c(Job_Id__c = item.parentjobid);
+       		if(!Test.isRunningTest()){
+	       		ApexTestQueueItem item = [SELECT ParentJobId FROM ApexTestQueueItem WHERE Id =: queueItems[0].Id LIMIT 1];
+	       		ksj = new Kombucha_Schedule_Job__c(Job_Id__c = item.parentjobid);
+       		}else{
+       			ksj = new Kombucha_Schedule_Job__c(Job_Id__c = 'dummyData');
+       		}
 
        		insert ksj;
        }
@@ -118,41 +124,4 @@ global with sharing class KombuchaTestJobQueuer implements schedulable {
 		return '\'%' + keyword + '%\' ';
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

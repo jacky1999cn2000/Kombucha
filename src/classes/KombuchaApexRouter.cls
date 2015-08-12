@@ -223,6 +223,6 @@ global with sharing class KombuchaApexRouter {
 
 
 	public void test(){
-		KombuchaTestJobQueuer.enqueueTests();
+		KombuchaCodeCoverageCalculator.getClassCoverage();
 	}
 }
