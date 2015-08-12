@@ -74,6 +74,15 @@ app.config(['$stateProvider','$urlRouterProvider','resourceUrl', function($state
 				controller: 'SettingsController'
 			}
 		}
+	})
+
+	.state('home.analytics', {
+		url: 'analytics',
+		views: {
+			'content@': {
+				templateUrl: resourceUrl+'/templates/partials/analytics.html'
+			}
+		}
 	});
 }]);
 

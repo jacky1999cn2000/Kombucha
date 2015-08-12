@@ -36,10 +36,10 @@
 
 		<script src="{!URLFOR($Resource.Kombucha, 'app/services/RemoteService.js')}"></script>
 		<script src="{!URLFOR($Resource.Kombucha, 'app/services/SettingsService.js')}"></script>
-
+<!--
 <apex:form>
 	<apex:commandButton action="{!test}" value="TEST" id="theButton"/>
 </apex:form>
-
+-->
 	</body> 
 </apex:page>

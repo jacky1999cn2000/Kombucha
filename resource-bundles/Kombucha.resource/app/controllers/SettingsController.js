@@ -10,7 +10,7 @@ app.controller('SettingsController', ['$scope', '$state','settingsService', func
 			//when code runs here, we know the data in service has been initiated already, so 
 			//we could call getData() method safely
 			$scope.kombucha = settingsService.getData();
-console.log('setting data: '+JSON.stringify($scope.kombucha));
+
 			//define all other methods then
 			$scope.selectTab = function(tabName){
 				switch(tabName) {
