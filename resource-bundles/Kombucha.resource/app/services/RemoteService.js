@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 var app = angular.module('kombucha');
 
 app.factory('remoteService', ['$q', '$rootScope', function($q, $rootScope){
@@ -29,3 +29,4 @@ app.factory('remoteService', ['$q', '$rootScope', function($q, $rootScope){
 
 	return fac;
 }]);
+*/
